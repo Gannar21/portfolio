@@ -6,6 +6,11 @@ import { Mail, Linkedin, Github, Send, CheckCircle2, AlertCircle, Loader2 } from
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@asmag.dev';
 
+// Formsubmit AJAX endpoint — no account or API key needed.
+// On first submission they send a one-time verification email; after that all
+// submissions arrive directly in CONTACT_EMAIL's inbox.
+const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+
 interface FormData {
   name: string;
   email: string;
@@ -70,6 +75,7 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     const validation = validate(formData);
     if (Object.keys(validation).length > 0) {
       setErrors(validation);
@@ -79,30 +85,25 @@ export default function Contact() {
     setStatus('submitting');
 
     try {
-      const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-      if (!web3Key || web3Key === 'your_web3forms_access_key_here') {
-        // Development fallback — simulate success so layout can be tested
-        await new Promise((r) => setTimeout(r, 800));
-        setStatus('success');
-        setFormData(INITIAL_FORM);
-        return;
-      }
-
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(FORMSUBMIT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
         body: JSON.stringify({
-          access_key: web3Key,
           name: formData.name,
           email: formData.email,
-          subject: `[Portfolio] ${formData.subject}`,
-          message: `Company/Org: ${formData.company || '—'}\n\n${formData.message}`,
-          from_name: 'Portfolio Contact Form',
+          _subject: `[Portfolio] ${formData.subject}`,
+          message: `Company / Org: ${formData.company || '—'}\n\n${formData.message}`,
+          _captcha: 'false',
+          _template: 'table',
         }),
       });
 
       const data = await res.json();
-      if (data.success) {
+
+      if (data.success === 'true' || data.success === true) {
         setStatus('success');
         setFormData(INITIAL_FORM);
       } else {
@@ -187,9 +188,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-charcoal-subtle uppercase tracking-wide">GitHub</p>
-                  <p className="text-sm font-medium text-charcoal group-hover:text-charcoal transition-colors duration-200">
-                    Gannar21
-                  </p>
+                  <p className="text-sm font-medium text-charcoal">Gannar21</p>
                 </div>
               </a>
             </motion.div>
@@ -295,7 +294,7 @@ export default function Contact() {
                         value={formData.subject}
                         onChange={handleChange}
                         className={`input-field ${errors.subject ? 'border-terracotta/60 focus:ring-terracotta/30 focus:border-terracotta/60' : ''}`}
-                        placeholder="PFE opportunity, project inquiry..."
+                        placeholder="PFE opportunity, project inquiry…"
                         aria-required="true"
                         aria-describedby={errors.subject ? 'subject-error' : undefined}
                       />
@@ -319,7 +318,7 @@ export default function Contact() {
                         value={formData.message}
                         onChange={handleChange}
                         className={`input-field resize-none ${errors.message ? 'border-terracotta/60 focus:ring-terracotta/30 focus:border-terracotta/60' : ''}`}
-                        placeholder="Tell me about the opportunity or your project..."
+                        placeholder="Tell me about the opportunity or your project…"
                         aria-required="true"
                         aria-describedby={errors.message ? 'message-error' : 'message-hint'}
                       />
@@ -340,7 +339,10 @@ export default function Contact() {
 
                     {/* Error banner */}
                     {status === 'error' && (
-                      <div className="flex items-center gap-2 p-3 rounded-lg bg-terracotta-subtle border border-terracotta-border text-sm text-terracotta" role="alert">
+                      <div
+                        className="flex items-center gap-2 p-3 rounded-lg bg-terracotta-subtle border border-terracotta-border text-sm text-terracotta"
+                        role="alert"
+                      >
                         <AlertCircle size={16} aria-hidden="true" />
                         Something went wrong. Please try again or email me directly.
                       </div>
@@ -365,18 +367,6 @@ export default function Contact() {
                         </>
                       )}
                     </button>
-
-                    <p className="text-xs text-charcoal-subtle text-center">
-                      Powered by{' '}
-                      <a
-                        href="https://web3forms.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline hover:text-charcoal-muted"
-                      >
-                        Web3Forms
-                      </a>
-                    </p>
                   </div>
                 </form>
               )}

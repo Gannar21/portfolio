@@ -45,12 +45,9 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /portfolio
           NEXT_PUBLIC_SITE_URL: https://gannar21.github.io/portfolio
 
-          # Web3Forms key — set this in GitHub → Settings → Secrets → Actions
-          # Name it exactly: NEXT_PUBLIC_WEB3FORMS_KEY
-          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.NEXT_PUBLIC_WEB3FORMS_KEY }}
-
-          # Your contact email — set this in GitHub Secrets
+          # Your contact email — set this in GitHub → Settings → Secrets → Actions
           # Name it exactly: NEXT_PUBLIC_CONTACT_EMAIL
+          # Formsubmit uses this address to deliver form submissions. No API key needed.
           NEXT_PUBLIC_CONTACT_EMAIL: ${{ secrets.NEXT_PUBLIC_CONTACT_EMAIL }}
 
       - name: Configure Pages

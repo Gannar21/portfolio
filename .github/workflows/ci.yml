@@ -33,6 +33,5 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_PUBLIC_WEB3FORMS_KEY: ci_placeholder
           NEXT_PUBLIC_CONTACT_EMAIL: contact@example.com
           NEXT_PUBLIC_SITE_URL: https://gannar21.github.io/portfolio
