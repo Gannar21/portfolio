@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-charcoal;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    @apply bg-blue-subtle text-blue;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-charcoal;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .section-py {
+    @apply py-20 lg:py-28;
+  }
+
+  .container-max {
+    @apply max-w-6xl mx-auto px-6 lg:px-8;
+  }
+
+  .section-tag {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue px-3 py-1 rounded-full bg-blue-subtle border border-blue-border mb-4;
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl font-bold text-charcoal tracking-tight;
+  }
+
+  .section-subheading {
+    @apply mt-4 text-lg text-charcoal-muted max-w-2xl;
+  }
+
+  .card {
+    @apply bg-surface rounded-xl border border-border p-6 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+
+  .tech-pill {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-border-light text-charcoal-light border border-border;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue text-white font-semibold text-sm transition-all duration-200 hover:bg-blue-600 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-surface text-charcoal font-semibold text-sm border border-border transition-all duration-200 hover:border-charcoal-light hover:shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg text-charcoal-muted font-medium text-sm transition-all duration-200 hover:text-charcoal hover:bg-border-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue;
+  }
+
+  .social-link {
+    @apply inline-flex items-center gap-2 text-charcoal-muted text-sm font-medium transition-colors duration-200 hover:text-charcoal;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-lg border border-border bg-surface text-charcoal text-sm placeholder:text-charcoal-subtle transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue/30 focus:border-blue/60;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-charcoal-light mb-1.5;
+  }
+}
