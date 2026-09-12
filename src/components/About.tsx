@@ -150,7 +150,7 @@ export default function About() {
                 PFE / Capstone Internship
               </p>
               <p className="text-xs text-charcoal-muted mt-0.5">
-                6 months · Starting January 2027 · Europe preferred
+                6 months · Starting January 2027
               </p>
             </div>
           </motion.div>
