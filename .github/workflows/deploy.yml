@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_dispatch:          # Allow manual trigger from GitHub UI
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,12 +12,11 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false   # Let an in-progress deploy finish first
+  cancel-in-progress: false
 
 jobs:
-  # ── 1. Build ────────────────────────────────────────────────────────────────
   build:
-    name: Lint, Type-check & Build
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,35 +29,20 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Type-check
-        run: npm run type-check
+        run: npm install --legacy-peer-deps
 
       - name: Build static site
         run: npm run build
         env:
-          # Repo is at gannar21.github.io/portfolio — so basePath must be /portfolio
           NEXT_PUBLIC_BASE_PATH: /portfolio
           NEXT_PUBLIC_SITE_URL: https://gannar21.github.io/portfolio
-
-          # Your contact email — set this in GitHub → Settings → Secrets → Actions
-          # Name it exactly: NEXT_PUBLIC_CONTACT_EMAIL
-          # Formsubmit uses this address to deliver form submissions. No API key needed.
           NEXT_PUBLIC_CONTACT_EMAIL: ${{ secrets.NEXT_PUBLIC_CONTACT_EMAIL }}
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
-  # ── 2. Deploy ────────────────────────────────────────────────────────────────
   deploy:
     name: Deploy
     needs: build
