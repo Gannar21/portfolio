@@ -5,24 +5,9 @@ import { useRef } from 'react';
 import { Globe } from 'lucide-react';
 
 const LANGUAGES = [
-  {
-    name: 'Arabic',
-    level: 'Native',
-    dots: 5,
-    color: 'bg-blue',
-  },
-  {
-    name: 'French',
-    level: 'Fluent',
-    dots: 4,
-    color: 'bg-teal',
-  },
-  {
-    name: 'English',
-    level: 'Professional Working Proficiency',
-    dots: 4,
-    color: 'bg-terracotta',
-  },
+  { name: 'Arabic', level: 'Native', dots: 5, color: 'bg-blue' },
+  { name: 'French', level: 'Fluent', dots: 4, color: 'bg-teal' },
+  { name: 'English', level: 'Professional Working Proficiency', dots: 4, color: 'bg-terracotta' },
 ];
 
 export default function Languages() {
@@ -67,7 +52,7 @@ export default function Languages() {
                   <span
                     key={idx}
                     className={`w-5 h-1.5 rounded-full transition-colors duration-200 ${
-                      idx < lang.dots ? lang.color : 'bg-border'
+                      idx < lang.dots ? lang.color : 'bg-white/10'
                     }`}
                     aria-hidden="true"
                   />

@@ -54,7 +54,7 @@ const PHASES = [
     icon: Layers,
     label: 'Findings',
     color: 'text-charcoal-light',
-    bg: 'bg-border-light border-border',
+    bg: 'bg-white/5 border-white/10',
     summary: 'Identified 10 distinct software-quality issues spanning Git diff handling, parsing, scoring, export, and UI navigation.',
   },
   {
@@ -112,7 +112,7 @@ export default function CaseStudy() {
           </motion.p>
         </div>
 
-        {/* Phase pipeline (always visible) */}
+        {/* Phase pipeline */}
         <motion.div {...animate(0.2)} className="mb-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
             {PHASES.map((phase, i) => {
@@ -148,9 +148,10 @@ export default function CaseStudy() {
             className={cn(
               'inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border text-sm font-medium transition-all duration-200',
               expanded
-                ? 'bg-blue text-white border-blue hover:bg-blue-600'
-                : 'bg-surface text-charcoal border-border hover:border-charcoal-light'
+                ? 'text-white border-blue/30'
+                : 'bg-white/5 text-charcoal border-white/10 hover:border-white/20 hover:bg-white/10'
             )}
+            style={expanded ? { background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)' } : {}}
             aria-expanded={expanded}
             aria-controls="case-study-details"
           >
@@ -199,9 +200,8 @@ export default function CaseStudy() {
                   </ul>
                 </div>
 
-                {/* Right column: platform overview + tech + AI note */}
+                {/* Right column */}
                 <div className="space-y-5">
-                  {/* Platform overview */}
                   <div className="card">
                     <h3 className="font-semibold text-charcoal text-sm mb-3">Platform Context</h3>
                     <p className="text-sm text-charcoal-muted leading-relaxed">
@@ -213,7 +213,6 @@ export default function CaseStudy() {
                     </p>
                   </div>
 
-                  {/* Technologies */}
                   <div className="card">
                     <h3 className="font-semibold text-charcoal text-sm mb-3">Technologies</h3>
                     <div className="flex flex-wrap gap-1.5">
@@ -223,7 +222,6 @@ export default function CaseStudy() {
                     </div>
                   </div>
 
-                  {/* AI note */}
                   <div className="rounded-xl border border-blue-border bg-blue-subtle p-4">
                     <p className="text-xs font-semibold text-blue uppercase tracking-wide mb-1.5">
                       AI-Assisted Development

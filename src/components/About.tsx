@@ -84,7 +84,7 @@ export default function About() {
                 {INTERESTS.map(({ label, icon: Icon }) => (
                   <span
                     key={label}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-border-light text-charcoal-light border border-border transition-colors duration-200 hover:border-blue/40 hover:text-blue hover:bg-blue-subtle"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-charcoal-muted border border-white/10 transition-all duration-200 hover:border-blue-border hover:text-blue hover:bg-blue-subtle"
                   >
                     <Icon size={12} aria-hidden="true" />
                     {label}
@@ -96,10 +96,13 @@ export default function About() {
 
           {/* Right — education card */}
           <motion.div {...animate(0.2)}>
-            <div className="rounded-2xl border border-border bg-surface shadow-card overflow-hidden">
-              {/* Card header */}
-              <div className="bg-blue px-6 py-5">
-                <GraduationCap size={28} className="text-white/80 mb-3" aria-hidden="true" />
+            <div className="rounded-2xl border border-border bg-surface-2 shadow-card overflow-hidden">
+              {/* Card header — gradient */}
+              <div
+                className="px-6 py-5"
+                style={{ background: 'linear-gradient(135deg, #2D1260 0%, #0A2540 100%)' }}
+              >
+                <GraduationCap size={28} className="text-white/70 mb-3" aria-hidden="true" />
                 <h3 className="text-white font-bold text-lg leading-snug">
                   Engineering Degree in Software Engineering
                 </h3>
@@ -142,7 +145,7 @@ export default function About() {
             </div>
 
             {/* Seeking badge */}
-            <div className="mt-4 p-4 rounded-xl border border-border bg-background">
+            <div className="mt-4 p-4 rounded-xl border border-border bg-surface-2">
               <p className="text-xs font-semibold uppercase tracking-wider text-charcoal-subtle mb-1.5">
                 Currently Seeking
               </p>

@@ -5,16 +5,8 @@ import { useRef } from 'react';
 import { BadgeCheck } from 'lucide-react';
 
 const CERTS = [
-  {
-    title: 'Full-Stack Development',
-    issuer: 'Udemy',
-    color: 'blue' as const,
-  },
-  {
-    title: 'Agile Project Management',
-    issuer: 'Google',
-    color: 'teal' as const,
-  },
+  { title: 'Full-Stack Development', issuer: 'Udemy', color: 'blue' as const },
+  { title: 'Agile Project Management', issuer: 'Google', color: 'teal' as const },
 ];
 
 const COLOR_STYLES = {
@@ -42,11 +34,7 @@ export default function Certifications() {
   });
 
   return (
-    <section
-      aria-labelledby="certs-heading"
-      ref={ref}
-      className="pb-0"
-    >
+    <section aria-labelledby="certs-heading" ref={ref} className="pb-0">
       <div className="container-max">
         <motion.h3
           {...animate(0)}

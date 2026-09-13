@@ -76,13 +76,7 @@ const COLOR_STYLES = {
   },
 };
 
-function SkillGroup({
-  category,
-  delay,
-}: {
-  category: SkillCategory;
-  delay: number;
-}) {
+function SkillGroup({ category, delay }: { category: SkillCategory; delay: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-40px' });
   const prefersReduced = useReducedMotion();

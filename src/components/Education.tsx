@@ -55,9 +55,13 @@ export default function Education() {
         <div className="grid lg:grid-cols-[1fr_340px] gap-8 items-start">
           {/* Main education card */}
           <motion.div {...animate(0.14)}>
-            <div className="rounded-2xl border border-border bg-background overflow-hidden">
-              {/* Top bar */}
-              <div className="h-1 bg-gradient-to-r from-blue to-teal" aria-hidden="true" />
+            <div className="rounded-2xl border border-border bg-surface-2 overflow-hidden">
+              {/* Gradient top bar */}
+              <div
+                className="h-1"
+                aria-hidden="true"
+                style={{ background: 'linear-gradient(to right, #8b5cf6, #22d3ee)' }}
+              />
 
               <div className="p-8">
                 <div className="flex items-start gap-5 mb-6">
@@ -79,7 +83,7 @@ export default function Education() {
 
                 {/* Cycle breakdown */}
                 <div className="grid sm:grid-cols-2 gap-4 mb-6">
-                  <div className="rounded-xl border border-border bg-surface p-4">
+                  <div className="rounded-xl border border-border bg-background p-4">
                     <div className="w-7 h-7 rounded-lg bg-blue-subtle flex items-center justify-center mb-2" aria-hidden="true">
                       <span className="text-blue font-bold text-xs">1</span>
                     </div>
@@ -89,7 +93,7 @@ export default function Education() {
                       Mathematics, physics, computer science fundamentals, and engineering methodology.
                     </p>
                   </div>
-                  <div className="rounded-xl border border-border bg-surface p-4">
+                  <div className="rounded-xl border border-border bg-background p-4">
                     <div className="w-7 h-7 rounded-lg bg-teal-subtle flex items-center justify-center mb-2" aria-hidden="true">
                       <span className="text-teal font-bold text-xs">2</span>
                     </div>
@@ -120,7 +124,7 @@ export default function Education() {
 
           {/* Coursework */}
           <motion.div {...animate(0.24)}>
-            <div className="rounded-2xl border border-border bg-background p-6">
+            <div className="rounded-2xl border border-border bg-surface-2 p-6">
               <div className="flex items-center gap-2.5 mb-5">
                 <BookOpen size={18} className="text-charcoal-muted" aria-hidden="true" />
                 <h3 className="font-semibold text-charcoal text-sm">Relevant Coursework</h3>

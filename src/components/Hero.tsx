@@ -8,31 +8,10 @@ const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@asmag.de
 const SPECIALIZATIONS = ['Software Engineering', 'AI/ML', 'LLMs', 'Cybersecurity'];
 
 const SOCIAL_LINKS = [
-  {
-    label: 'GitHub',
-    href: 'https://github.com/Gannar21',
-    icon: Github,
-    external: true,
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/asma-gannar-036421273/',
-    icon: Linkedin,
-    external: true,
-  },
-  {
-    label: 'Email',
-    href: `mailto:${CONTACT_EMAIL}`,
-    icon: Mail,
-    external: false,
-  },
-  {
-    label: 'CV',
-    href: '/Asma-Gannar-CV.pdf',
-    icon: Download,
-    download: true,
-    external: false,
-  },
+  { label: 'GitHub', href: 'https://github.com/Gannar21', icon: Github, external: true },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/asma-gannar-036421273/', icon: Linkedin, external: true },
+  { label: 'Email', href: `mailto:${CONTACT_EMAIL}`, icon: Mail, external: false },
+  { label: 'CV', href: '/Asma-Gannar-CV.pdf', icon: Download, download: true, external: false },
 ];
 
 export default function Hero() {
@@ -41,7 +20,7 @@ export default function Hero() {
   const fadeUp = (delay: number) => ({
     initial: prefersReduced ? {} : { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
   });
 
   return (
@@ -50,25 +29,44 @@ export default function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden bg-background"
       aria-label="Introduction"
     >
+      {/* Violet glow orb — top left */}
+      <div
+        className="absolute top-[-15%] left-[-10%] w-[700px] h-[700px] rounded-full pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background: 'radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 65%)',
+          filter: 'blur(40px)',
+        }}
+      />
+
+      {/* Cyan glow orb — bottom right */}
+      <div
+        className="absolute bottom-[-20%] right-[-8%] w-[600px] h-[600px] rounded-full pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background: 'radial-gradient(circle, rgba(34,211,238,0.13) 0%, transparent 65%)',
+          filter: 'blur(40px)',
+        }}
+      />
+
       {/* Subtle dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
-          backgroundImage:
-            'radial-gradient(circle, #d1d5db 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
-          opacity: 0.35,
         }}
       />
 
-      {/* Soft gradient overlay */}
+      {/* Noise texture overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-[0.015]"
         aria-hidden="true"
         style={{
-          background:
-            'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(239,246,255,0.6) 0%, transparent 70%)',
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+          backgroundSize: '200px 200px',
         }}
       />
 
@@ -76,9 +74,9 @@ export default function Hero() {
         <div className="max-w-3xl">
           {/* Availability badge */}
           <motion.div {...fadeUp(0.05)} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-border bg-blue-subtle text-blue text-sm font-medium">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-charcoal-light text-sm font-medium">
               <span
-                className="w-2 h-2 rounded-full bg-blue animate-pulse"
+                className="w-2 h-2 rounded-full bg-teal animate-pulse"
                 aria-hidden="true"
               />
               Open to PFE / Capstone Internship — January 2027
@@ -88,7 +86,13 @@ export default function Hero() {
           {/* Name */}
           <motion.h1
             {...fadeUp(0.12)}
-            className="text-[clamp(2.75rem,8vw,4.5rem)] font-bold text-charcoal tracking-tight leading-[1.08] mb-5"
+            className="text-[clamp(2.75rem,8vw,4.75rem)] font-bold tracking-tight leading-[1.06] mb-5"
+            style={{
+              background: 'linear-gradient(135deg, #e2d9ff 0%, #a78bfa 45%, #67e8f9 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
           >
             Asma Gannar
           </motion.h1>
@@ -103,7 +107,7 @@ export default function Hero() {
               <span key={spec} className="inline-flex items-center gap-2.5">
                 {spec}
                 {i < SPECIALIZATIONS.length - 1 && (
-                  <span className="text-border-DEFAULT font-normal" aria-hidden="true">·</span>
+                  <span className="text-charcoal-subtle font-normal" aria-hidden="true">·</span>
                 )}
               </span>
             ))}
@@ -121,7 +125,7 @@ export default function Hero() {
           {/* Education line */}
           <motion.p
             {...fadeUp(0.35)}
-            className="text-sm text-charcoal-muted mb-10 flex items-center gap-1.5"
+            className="text-sm text-charcoal-subtle mb-10 flex items-center gap-1.5"
           >
             <span className="w-1 h-1 rounded-full bg-teal inline-block" aria-hidden="true" />
             Final-Year Software Engineering Student · Class of 2027 · MedTech, SMU

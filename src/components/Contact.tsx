@@ -6,9 +6,6 @@ import { Mail, Linkedin, Github, Send, CheckCircle2, AlertCircle, Loader2 } from
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@asmag.dev';
 
-// Formsubmit AJAX endpoint — no account or API key needed.
-// On first submission they send a one-time verification email; after that all
-// submissions arrive directly in CONTACT_EMAIL's inbox.
 const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
 interface FormData {
@@ -19,13 +16,7 @@ interface FormData {
   message: string;
 }
 
-const INITIAL_FORM: FormData = {
-  name: '',
-  email: '',
-  company: '',
-  subject: '',
-  message: '',
-};
+const INITIAL_FORM: FormData = { name: '', email: '', company: '', subject: '', message: '' };
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -63,9 +54,7 @@ export default function Contact() {
     transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] },
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormData]) {
@@ -75,22 +64,16 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     const validation = validate(formData);
     if (Object.keys(validation).length > 0) {
       setErrors(validation);
       return;
     }
-
     setStatus('submitting');
-
     try {
       const res = await fetch(FORMSUBMIT_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
@@ -100,9 +83,7 @@ export default function Contact() {
           _template: 'table',
         }),
       });
-
       const data = await res.json();
-
       if (data.success === 'true' || data.success === true) {
         setStatus('success');
         setFormData(INITIAL_FORM);
@@ -144,7 +125,7 @@ export default function Contact() {
             <motion.div {...animate(0.21)} className="space-y-4">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-surface group hover:border-blue/40 hover:bg-blue-subtle transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-surface-2 group hover:border-blue-border hover:bg-blue-subtle transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
                 aria-label={`Send email to ${CONTACT_EMAIL}`}
               >
                 <div className="w-10 h-10 rounded-lg bg-blue-subtle border border-blue-border flex items-center justify-center flex-shrink-0 group-hover:bg-blue group-hover:border-blue transition-all duration-200">
@@ -162,7 +143,7 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/asma-gannar-036421273/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-surface group hover:border-blue/40 hover:bg-blue-subtle transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-surface-2 group hover:border-blue-border hover:bg-blue-subtle transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
                 aria-label="Connect on LinkedIn (opens in new tab)"
               >
                 <div className="w-10 h-10 rounded-lg bg-blue-subtle border border-blue-border flex items-center justify-center flex-shrink-0 group-hover:bg-blue group-hover:border-blue transition-all duration-200">
@@ -180,11 +161,11 @@ export default function Contact() {
                 href="https://github.com/Gannar21"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-surface group hover:border-charcoal/20 hover:bg-border-light transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
+                className="flex items-center gap-4 p-4 rounded-xl border border-border bg-surface-2 group hover:border-white/25 hover:bg-white/8 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
                 aria-label="View GitHub profile (opens in new tab)"
               >
-                <div className="w-10 h-10 rounded-lg bg-border-light border border-border flex items-center justify-center flex-shrink-0 group-hover:bg-charcoal group-hover:border-charcoal transition-all duration-200">
-                  <Github size={18} className="text-charcoal-light group-hover:text-white transition-colors duration-200" aria-hidden="true" />
+                <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/15 group-hover:border-white/25 transition-all duration-200">
+                  <Github size={18} className="text-charcoal-muted group-hover:text-charcoal transition-colors duration-200" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-charcoal-subtle uppercase tracking-wide">GitHub</p>
@@ -206,10 +187,7 @@ export default function Contact() {
                   <p className="text-charcoal-muted text-sm leading-relaxed mb-5">
                     Thank you for reaching out. I&apos;ll get back to you as soon as possible.
                   </p>
-                  <button
-                    onClick={() => setStatus('idle')}
-                    className="btn-secondary text-sm"
-                  >
+                  <button onClick={() => setStatus('idle')} className="btn-secondary text-sm">
                     Send Another Message
                   </button>
                 </div>
@@ -218,17 +196,13 @@ export default function Contact() {
                   <h3 className="font-bold text-charcoal text-base mb-5">Send a Message</h3>
 
                   <div className="space-y-4">
-                    {/* Name */}
                     <div>
                       <label htmlFor="name" className="label">
                         Name <span aria-hidden="true" className="text-terracotta">*</span>
                       </label>
                       <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={formData.name}
-                        onChange={handleChange}
+                        id="name" name="name" type="text"
+                        value={formData.name} onChange={handleChange}
                         className={`input-field ${errors.name ? 'border-terracotta/60 focus:ring-terracotta/30 focus:border-terracotta/60' : ''}`}
                         placeholder="Your full name"
                         aria-required="true"
@@ -242,17 +216,13 @@ export default function Contact() {
                       )}
                     </div>
 
-                    {/* Email */}
                     <div>
                       <label htmlFor="email" className="label">
                         Email <span aria-hidden="true" className="text-terracotta">*</span>
                       </label>
                       <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
+                        id="email" name="email" type="email"
+                        value={formData.email} onChange={handleChange}
                         className={`input-field ${errors.email ? 'border-terracotta/60 focus:ring-terracotta/30 focus:border-terracotta/60' : ''}`}
                         placeholder="your@email.com"
                         aria-required="true"
@@ -266,33 +236,25 @@ export default function Contact() {
                       )}
                     </div>
 
-                    {/* Company */}
                     <div>
                       <label htmlFor="company" className="label">
                         Company / Organization
                       </label>
                       <input
-                        id="company"
-                        name="company"
-                        type="text"
-                        value={formData.company}
-                        onChange={handleChange}
+                        id="company" name="company" type="text"
+                        value={formData.company} onChange={handleChange}
                         className="input-field"
                         placeholder="Your company (optional)"
                       />
                     </div>
 
-                    {/* Subject */}
                     <div>
                       <label htmlFor="subject" className="label">
                         Subject <span aria-hidden="true" className="text-terracotta">*</span>
                       </label>
                       <input
-                        id="subject"
-                        name="subject"
-                        type="text"
-                        value={formData.subject}
-                        onChange={handleChange}
+                        id="subject" name="subject" type="text"
+                        value={formData.subject} onChange={handleChange}
                         className={`input-field ${errors.subject ? 'border-terracotta/60 focus:ring-terracotta/30 focus:border-terracotta/60' : ''}`}
                         placeholder="PFE opportunity, project inquiry…"
                         aria-required="true"
@@ -306,17 +268,13 @@ export default function Contact() {
                       )}
                     </div>
 
-                    {/* Message */}
                     <div>
                       <label htmlFor="message" className="label">
                         Message <span aria-hidden="true" className="text-terracotta">*</span>
                       </label>
                       <textarea
-                        id="message"
-                        name="message"
-                        rows={5}
-                        value={formData.message}
-                        onChange={handleChange}
+                        id="message" name="message" rows={5}
+                        value={formData.message} onChange={handleChange}
                         className={`input-field resize-none ${errors.message ? 'border-terracotta/60 focus:ring-terracotta/30 focus:border-terracotta/60' : ''}`}
                         placeholder="Tell me about the opportunity or your project…"
                         aria-required="true"
@@ -337,7 +295,6 @@ export default function Contact() {
                       </div>
                     </div>
 
-                    {/* Error banner */}
                     {status === 'error' && (
                       <div
                         className="flex items-center gap-2 p-3 rounded-lg bg-terracotta-subtle border border-terracotta-border text-sm text-terracotta"
@@ -348,7 +305,6 @@ export default function Contact() {
                       </div>
                     )}
 
-                    {/* Submit */}
                     <button
                       type="submit"
                       disabled={status === 'submitting'}

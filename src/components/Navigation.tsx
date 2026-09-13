@@ -20,16 +20,12 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
       { threshold: 0.3 }
@@ -62,7 +58,7 @@ export default function Navigation() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           isScrolled
-            ? 'bg-surface/95 backdrop-blur-md border-b border-border shadow-sm'
+            ? 'bg-surface/80 backdrop-blur-xl border-b border-border shadow-nav'
             : 'bg-transparent'
         )}
       >
@@ -74,7 +70,10 @@ export default function Navigation() {
               className="flex items-center gap-2.5 group focus-visible:outline-none"
               aria-label="Go to home"
             >
-              <div className="w-8 h-8 rounded-lg bg-blue flex items-center justify-center text-white text-sm font-bold tracking-tight transition-transform duration-200 group-hover:scale-105">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold tracking-tight transition-transform duration-200 group-hover:scale-105"
+                style={{ background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)' }}
+              >
                 AG
               </div>
               <span className="font-semibold text-charcoal text-sm hidden sm:block">
@@ -89,10 +88,10 @@ export default function Navigation() {
                   key={href}
                   onClick={() => handleNavClick(href)}
                   className={cn(
-                    'px-3 py-1.5 rounded-md text-sm font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue',
+                    'px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue',
                     activeSection === href.replace('#', '')
                       ? 'text-blue bg-blue-subtle'
-                      : 'text-charcoal-muted hover:text-charcoal hover:bg-border-light'
+                      : 'text-charcoal-muted hover:text-charcoal hover:bg-white/5'
                   )}
                 >
                   {label}
@@ -116,7 +115,7 @@ export default function Navigation() {
             {/* Mobile menu button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg text-charcoal-muted hover:text-charcoal hover:bg-border-light transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+              className="lg:hidden p-2 rounded-lg text-charcoal-muted hover:text-charcoal hover:bg-white/5 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
@@ -135,7 +134,7 @@ export default function Navigation() {
       >
         {/* Backdrop */}
         <div
-          className="absolute inset-0 bg-charcoal/20 backdrop-blur-sm"
+          className="absolute inset-0 bg-background/70 backdrop-blur-sm"
           onClick={() => setMobileOpen(false)}
           aria-hidden="true"
         />
@@ -151,7 +150,7 @@ export default function Navigation() {
             <span className="font-semibold text-charcoal">Menu</span>
             <button
               onClick={() => setMobileOpen(false)}
-              className="p-2 rounded-lg text-charcoal-muted hover:text-charcoal hover:bg-border-light transition-colors duration-200"
+              className="p-2 rounded-lg text-charcoal-muted hover:text-charcoal hover:bg-white/5 transition-colors duration-200"
               aria-label="Close menu"
             >
               <X size={18} />
@@ -167,7 +166,7 @@ export default function Navigation() {
                   'w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200',
                   activeSection === href.replace('#', '')
                     ? 'text-blue bg-blue-subtle'
-                    : 'text-charcoal-muted hover:text-charcoal hover:bg-border-light'
+                    : 'text-charcoal-muted hover:text-charcoal hover:bg-white/5'
                 )}
               >
                 {label}

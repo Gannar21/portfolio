@@ -98,6 +98,12 @@ const CATEGORY_STYLES = {
   terracotta: 'bg-terracotta-subtle text-terracotta border-terracotta-border',
 };
 
+const CARD_GLOW = {
+  blue: 'hover:shadow-glow-blue',
+  teal: 'hover:shadow-glow-teal',
+  terracotta: '',
+};
+
 function ProjectCard({ project, delay }: { project: Project; delay: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-40px' });
@@ -109,7 +115,7 @@ function ProjectCard({ project, delay }: { project: Project; delay: number }) {
       initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="card flex flex-col h-full group"
+      className={`card flex flex-col h-full group ${CARD_GLOW[project.categoryColor]}`}
       aria-label={`Project: ${project.title}`}
     >
       {/* Header */}
@@ -173,7 +179,7 @@ function ProjectCard({ project, delay }: { project: Project; delay: number }) {
       </div>
 
       {/* Links */}
-      <div className="flex items-center gap-3 pt-4 border-t border-border-light">
+      <div className="flex items-center gap-3 pt-4 border-t border-border">
         {project.github && (
           <a
             href={project.github}
@@ -241,7 +247,7 @@ export default function Projects() {
           </motion.p>
         </div>
 
-        {/* Featured projects — larger cards */}
+        {/* Featured projects */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           {featured.map((project, i) => (
             <ProjectCard key={project.title} project={project} delay={0.2 + i * 0.1} />

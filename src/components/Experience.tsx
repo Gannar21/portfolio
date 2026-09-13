@@ -56,15 +56,17 @@ export default function Experience() {
         <div className="relative">
           {/* Vertical line */}
           <div
-            className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-border"
+            className="absolute left-4 md:left-6 top-0 bottom-0 w-px"
             aria-hidden="true"
+            style={{ background: 'linear-gradient(to bottom, #8b5cf6, #22d3ee)' }}
           />
 
           <motion.div {...animate(0.2)} className="relative pl-12 md:pl-16">
             {/* Dot */}
             <div
-              className="absolute left-2.5 md:left-4 top-6 w-3 h-3 rounded-full bg-blue border-2 border-surface ring-2 ring-blue/20"
+              className="absolute left-2.5 md:left-4 top-6 w-3 h-3 rounded-full bg-blue border-2 border-background ring-2 ring-blue/30"
               aria-hidden="true"
+              style={{ boxShadow: '0 0 10px rgba(139,92,246,0.5)' }}
             />
 
             <div className="card group">
@@ -97,7 +99,7 @@ export default function Experience() {
               </div>
 
               {/* Project */}
-              <div className="mb-5 p-4 rounded-lg bg-background border border-border">
+              <div className="mb-5 p-4 rounded-lg bg-background border border-blue-border/30">
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-charcoal-subtle mb-1.5">
                   Project
                 </p>
@@ -134,7 +136,7 @@ export default function Experience() {
               </div>
 
               {/* Case study link */}
-              <div className="mt-5 pt-5 border-t border-border-light">
+              <div className="mt-5 pt-5 border-t border-border">
                 <button
                   onClick={() => {
                     document.querySelector('#case-study')?.scrollIntoView({ behavior: 'smooth' });
