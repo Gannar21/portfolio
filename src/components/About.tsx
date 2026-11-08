@@ -65,14 +65,6 @@ export default function About() {
                 attention to correctness, maintainability, and user impact.
               </motion.p>
 
-              <motion.p {...animate(0.28)}>
-                I am actively seeking a{' '}
-                <strong className="text-charcoal font-semibold">
-                  6-month PFE / capstone internship
-                </strong>{' '}
-                starting January 2027, ideally in Europe, in areas such as Software Engineering,
-                AI/ML, AI Engineering, Data, or Cybersecurity.
-              </motion.p>
             </div>
 
             {/* Interest tags */}
@@ -144,18 +136,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Seeking badge */}
-            <div className="mt-4 p-4 rounded-xl border border-border bg-surface-2">
-              <p className="text-xs font-semibold uppercase tracking-wider text-charcoal-subtle mb-1.5">
-                Currently Seeking
-              </p>
-              <p className="text-sm font-semibold text-charcoal">
-                PFE / Capstone Internship
-              </p>
-              <p className="text-xs text-charcoal-muted mt-0.5">
-                6 months · Starting January 2027
-              </p>
-            </div>
           </motion.div>
         </div>
       </div>

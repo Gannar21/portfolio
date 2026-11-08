@@ -72,17 +72,6 @@ export default function Hero() {
 
       <div className="container-max relative z-10 pt-24 pb-16">
         <div className="max-w-3xl">
-          {/* Availability badge */}
-          <motion.div {...fadeUp(0.05)} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-charcoal-light text-sm font-medium">
-              <span
-                className="w-2 h-2 rounded-full bg-teal animate-pulse"
-                aria-hidden="true"
-              />
-              Open to PFE / Capstone Internship — January 2027
-            </span>
-          </motion.div>
-
           {/* Name */}
           <motion.h1
             {...fadeUp(0.12)}
